@@ -10,6 +10,7 @@ import (
 	"sync"
 	//"time"
 
+	"github.com/davecgh/go-spew/spew"
 	"github.com/hashicorp/nomad/api"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/common/version"
@@ -248,13 +249,15 @@ func collectMetricsForSingleAlloc(e *Exporter, w *sync.WaitGroup, allocStub *api
 
 	job := alloc.Job
 
+	spew.Dump(alloc.Job.Meta)
+
 	allocCount.With(prometheus.Labels{
 		"client_status":  alloc.ClientStatus,
 		"desired_status": alloc.DesiredStatus,
 		"job_type":       *job.Type,
-		//"job_id":         alloc.JobID,
-		//"task_group":     alloc.TaskGroup,
-		"node_id": alloc.NodeID,
+		"job":            alloc.JobID,
+		"task_group":     alloc.TaskGroup,
+		"node_id":        alloc.NodeID,
 	}).Add(1)
 
 	taskStates := alloc.TaskStates
