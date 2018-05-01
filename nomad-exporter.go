@@ -57,8 +57,8 @@ var (
 			"client_status",
 			"desired_status",
 			"job_type",
-			//"job_id",
-			//"task_group",
+			"job_id",
+			"task_group",
 			"node_id",
 		},
 	)
@@ -255,7 +255,7 @@ func collectMetricsForSingleAlloc(e *Exporter, w *sync.WaitGroup, allocStub *api
 		"client_status":  alloc.ClientStatus,
 		"desired_status": alloc.DesiredStatus,
 		"job_type":       *job.Type,
-		"job":            alloc.JobID,
+		"job_id":         alloc.JobID,
 		"task_group":     alloc.TaskGroup,
 		"node_id":        alloc.NodeID,
 	}).Add(1)
