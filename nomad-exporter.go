@@ -8,9 +8,8 @@ import (
 	"os"
 	"strconv"
 	"sync"
-	//"time"
 
-	"github.com/davecgh/go-spew/spew"
+	//"github.com/davecgh/go-spew/spew"
 	"github.com/hashicorp/nomad/api"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/common/version"
@@ -248,8 +247,6 @@ func collectMetricsForSingleAlloc(e *Exporter, w *sync.WaitGroup, allocStub *api
 	}
 
 	job := alloc.Job
-
-	spew.Dump(alloc.Job.Meta)
 
 	allocCount.With(prometheus.Labels{
 		"client_status":  alloc.ClientStatus,
