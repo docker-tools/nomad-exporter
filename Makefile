@@ -5,13 +5,13 @@ SOURCE_FILES := $(shell find $(SOURCEDIR) -name '*.go')
 INFRARED := $(DAVINCI_HOME)/infrared
 
 .PHONY: all
-all: pkg/darwin_amd64/$(BINARY)-darwin-amd64 pkg/linux_amd64/$(BINARY)-linux-amd64
+all: $(BINARY)
 
 pkg/darwin_amd64/$(BINARY)-darwin-amd64: $(SOURCE_FILES)
 	GOOS=darwin GOARCH=amd64 \
 	go build -v -o "$@"
 
-pkg/linux_amd64/$(BINARY)-linux-amd64: $(SOURCE_FILES)
+$(BINARY): $(SOURCE_FILES)
 	GOOS=linux GOARCH=amd64 \
 	go build -v -o "$@"
 
